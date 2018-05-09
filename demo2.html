@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="node_modules/vue/dist/vue.js"></script>
+		<script src="node_modules/axios/dist/axios.js" ></script>
+		<link href="node_modules/animate.css/animate.min.css" rel="stylesheet">
+		<style type="text/css">
+			.del {
+				text-decoration: line-through;
+				color: #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<nav class="navbar navbar-default">
+			  <div class="container-fluid">
+			    <div class="navbar-header">
+			      <a class="navbar-brand" href="#">
+			        TodoList
+			      </a>
+			    </div>
+			  </div>
+			</nav>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<div class="panel panel-warning">
+							<div class="panel-heading">
+								<h3 class="text-danger">亲~您还有{{count}}件事情要完成</h3> 
+								<input type="text" class="form-control" v-model="title" @keyup.13="add"/>
+							</div>
+							<div class="panel-body ">
+						  		<ul class="nav nav-pills">
+								  <li role="presentation" :class="{'active':hash=='all'}"><a href="#/all">全部任务</a></li>
+								  <li role="presentation" :class="{'active':hash=='finish'}"><a href="#/finish">已完成</a></li>
+								  <li role="presentation" :class="{'active':hash=='unfinish'}"><a href="#/unfinish">未完成</a></li>
+								</ul>
+						  	</div>
+						 	<div class="panel-footer">
+					 			<transition-group class="list-group" enter-active-class="animated bounceInLeft" leave-active-class="animated bounceOutRight" >
+								  	<div class="list-group-item" v-for="(d,index) in filterList" @dblclick="remember(d)" :key="d.id">
+									  	<span v-show="cur!=d">
+										  	<input type="checkbox" v-model="d.isChecked"/>
+										  	<span :class="{del:d.isChecked}">
+										  		{{d.title}}
+										  	</span>
+									  	</span>
+									  	<input type="text" v-model="d.title" v-show="cur==d" @keyup.13="cancel" @blur="cancel" v-focus="cur==d"/>
+									  	<button class="pull-right btn btn-danger btn-xs" @click="del(d)">&Chi;</button>
+								  	</div>
+								</transition-group>
+						  	</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script src="demo2.js" type="text/javascript" charset="utf-8"></script>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="node_modules/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="data" v-on:keyup.13="creatList"><br/>
+        <div>
+	        <div v-for="(d,index) in data_list">
+		        <input type="text"  v-bind:value="d" />
+	        	<span @click="clearItem(index)">X</span>
+	        </div>
+        </div>
+    </div>
+</body>
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+			data:'',
+			index:1,
+			data_list:[]
+        },
+        methods:{
+        	creatList (event) {
+        		this.data_list.push(this.data);
+        		this.data = '';
+        	},
+        	clearItem (index) {
+        		Vue.set(this.data_list,index,'')
+        	}
+        }
+    })
+</script>
+</html>

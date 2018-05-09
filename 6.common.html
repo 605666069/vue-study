@@ -1,0 +1,26 @@
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title></title>
+	</head>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<link href="https://cdn.bootcss.com/animate.css/3.5.2/animate.css" rel="stylesheet">
+	<body>
+		<div id="app1">
+			{{'hello' | my}}
+		</div>
+		<div id="app2">
+			{{'hello' | my}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		Vue.filter('my',data=>{return 'jw:' + data}) //挂载全局函数 必须放在顶级
+		let app1 = new Vue({
+			el:'#app1'
+			
+		})
+		let app2 = new Vue({
+			el:'#app2'
+		})
+	</script>
+</html>

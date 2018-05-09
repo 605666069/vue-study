@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="app">
+			<component2></component2>
+			<component1></component1>
+		</div>
+	</body>
+	<script type="text/javascript">
+		/*局部组件使用 组件是相互独立的 不能直接跨作用域
+		 * 1.创建组件
+		 * 2.注册组件
+		 * 3.使用组件
+		 * 子组件不能直接使用父组件的数据 （组件之间的数据交互） 组件可以无限嵌套
+		 * */
+		let obj = {school:'zm'};//如果组件中共用了数据 会导致同时更新
+		let component2 = {
+			template:`<div @click="fn">组件2 {{school}}</div>`,
+			data(){
+				return obj
+			},
+			methods:{
+				fn() {
+					this.school = 'hello'
+				}
+			}
+		};
+		let component1 = {
+			template:`<div>组件1 {{school}}</div>`,
+			data(){
+				return obj
+			}
+		};
+		let vm = new Vue({
+			el:'#app',
+			data:{
+			},
+			components:{
+				component2,
+				component1
+			},
+			data:{
+				
+			},
+		})
+		
+	</script>
+</html>

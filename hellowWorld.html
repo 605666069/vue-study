@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="node_modules/vue/dist/vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        {{msg}}
+        <button >点我</button>
+    </div>
+</body>
+<script>
+    let vm =  new Vue({
+        el:'#app',
+        data:{//data中的数据会倍vm所代理，
+            msg:'hello' //可以通过vm取到对应的内容
+        },
+        methods:{
+            fn(e,a){console.log(a)}
+        }
+    })
+</script>
+</html>

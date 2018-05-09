@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<script src="../node_modules/vue-router/dist/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+		
+	</head>
+	<body>
+		<div id="app">
+			<panel :type="d.type" @say-title="parent" v-for="(d,index) in articles" :key="index">
+				<div slot="title"><span v-html="d.title"></span></div>
+				<div slot="content">
+					{{d.content}}
+				</div>
+				<div slot="footer">{{d.auth}}</div>
+			</panel>
+		</div>
+		<template id="panel">
+			<div class="panel" :class="[color]">
+				<div class="panel-heading" ref="head">
+					<slot name="title"></slot>
+				</div>
+				<div class="panel-body">
+					<slot name="content"></slot>
+				</div>
+				<div class="panel-footer">
+					<slot name="footer"></slot>
+					<button @click="say">点我说标题</button>
+				</div>
+			</div>
+		</template>
+		
+	</body>
+	<script type="text/javascript">
+		let panel = {
+				template:'#panel',
+				computed:{
+					color() {
+						return `panel-${this.type}`
+					}
+				},
+				props:{
+					type:{//子组件不能更改父组件传递的内容
+						type:[String],
+						default:'default'
+					}
+				},
+				methods:{
+					say() {
+						this.$emit('say-title',this.$refs.head.innerText)
+					}
+				}
+			}
+		let vm = new Vue({
+			el:'#app',
+			components:{
+				panel
+			},
+			methods:{
+				parent(title) {
+					alert(title)
+				}
+			},
+			data:{
+				articles:[
+					{
+						type:"warning",
+						title:"<h2>Vue</h2>",
+						content:"这是vue的文章",
+						auth:'作者:x'
+					},
+					{
+						type:"primary",
+						title:"<h2>React</h2>",
+						content:"这是React的文章",
+						auth:'作者:xx'
+					},
+					{
+						type:"danger",
+						title:"<h2>Angular</h2>",
+						content:"这是Angular的文章",
+						auth:'作者:xxx'
+					}
+				]
+			}
+			
+			
+		})
+	</script>
+</html>

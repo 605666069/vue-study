@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<input type="text" v-model="a" />{{msg}}
+		</div>
+		<div id="app1">
+			<input type="text" v-model="a" />{{msg}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:"#app",
+			data:{
+				a:''
+			},
+			computed:{//computed 默认调用get 必须要有return，不支持异步
+				msg() {
+					if(this.a.length < 3){
+						return '少了'
+					}
+					if(this.a.length > 5){
+						return '多了'
+					}
+					
+				}
+				
+			}
+		})
+		let app1 = new Vue({
+			el:"#app1",
+			data:{
+				a:'',
+				msg:''
+			},
+			watch:{//只有值变化的时候才会触发 支持异步
+				a(newVal,oldVal){//watch 的属性名要和观察的人名字一致
+					setTimeout(()=>{
+						if(this.a.length < 3){
+							return this.msg =  '少了'
+						}
+						if(this.a.length > 5){
+							return this.msg = '多了'
+						}
+						this.msg = '';
+					},500)
+					
+				}
+			}
+		})
+	</script>
+</html>

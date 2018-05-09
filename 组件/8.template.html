@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+		<style type="text/css">
+			.mask {
+				position: fixed;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0,0,0,.35);
+			}
+			.dialog {
+				width: 400px;
+				height: 150px;
+				background-color: #FFFFFF;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform:translate3d(-50%,-50%,0) ;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<modal ></modal>
+		</div>
+		<template id="dialog">
+			<div class="mask">
+				<div class="dialog">
+					<button>关闭</button>
+				</div>
+			</div>
+		</template>
+	</body>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:'#app',
+			data:{
+			},
+			components:{
+				modal:{
+					template:"#dialog",
+				}
+			},
+		})
+	</script>
+</html>

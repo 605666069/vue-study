@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			全选 <input type="checkbox" v-model="checkAll"/><br />
+			<input type="checkbox" v-for="product in products" v-model="product.isChecked" />
+		</div>
+	</body>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:"#app",
+			data:{
+				products:[{isChecked:true},{isChecked:true}]
+			},
+			computed:{
+				checkAll:{
+					get() { //返回什么结果就会赋予给checkAll 属性
+						return this.products.every(item=>item.isChecked)
+					},
+					set(val) { //val是给checkout 赋予值的时候传递过来的
+						this.products.map(item=>item.isChecked=val)
+					}
+				}
+			}
+		})
+	</script>
+</html>

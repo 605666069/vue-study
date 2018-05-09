@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<!--父亲绑定一些事件，儿子触发这个事件 将参数传递过去，单向数据流 父亲数据刷新 儿子同时刷新 -->
+		<div id="app">
+			父亲:{{money}}
+			<child :m="money"  @child-msg="things"></child>
+		</div>
+	</body>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				money:400
+			},
+			components:{
+				child:{
+					props:['m'],
+					template:`<div>儿子{{m}} <button @click="getMoney">多要钱</button> </div>`,
+					methods:{
+						getMoney() {
+							this.$emit('child-msg',this.m+100);
+						}
+					}
+				},
+				
+			},
+			methods:{
+				things(val) {
+					this.money = val;
+				}
+			}
+		})
+	</script>
+</html>

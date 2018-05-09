@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="app">
+			父亲:{{money}}
+			<!--当前属性的属性=父亲的值 给儿子加了一个儿子属性 属性对应的数据是属于父亲的-->
+			<child :m="money"></child>
+		</div>
+	</body>
+	<script type="text/javascript">
+		//父传子
+		let vm = new Vue({
+			el:"#app",
+			data:{
+				money:100
+			},
+			components:{
+				child:{
+					props:{//属性名和data中的名字不能相同
+						m:{ 
+							//default:0,//可以给m赋予默认值，如果不传默认会调用default
+							//type:[String],//校验属性的类型，带:得到的是变量
+							required:true,//此属性是必须传递，但是不能和default同用
+							validator(val) {//自定义校验器
+								//第一个参数是当前传递的值 
+								return val>300
+							}
+						}
+					},//对象的形式可以校验
+					//props:['m'], //this.m = 100 ,会在子组件上声明一个m属性值是父亲的 数组无法校验
+					template:`<div>儿子 {{m}} </div>`,
+					
+				}
+			}
+			
+		})
+	</script>
+</html>

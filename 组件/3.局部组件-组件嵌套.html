@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="app">
+			<component2></component2>
+			<component1></component1>
+		</div>
+	</body>
+	<script type="text/javascript">
+		/*如果想在一个组件中使用另外一个组件 
+		1.先保证使用的组件是真实存在
+		2.在需引用这个组件的实例上通过components注册这个组件
+		3.组件需要在父级的模板中通过标签的形式引入*/
+		let grandson = {
+			template:`<div>grandson</div>`,
+		};
+		let son = {
+			template:`<div>son <grandson></grandson></div>`,
+			components:{
+				grandson
+			}
+		};
+		let parent = {
+			template:`<div>parent <son></son></div>`,
+			components:{
+				son
+			}
+		};
+		
+		let vm = new Vue({
+			el:'#app',
+			data:{
+			},
+			components:{
+				parent
+			},
+			data:{
+				
+			},
+			template:`<parent></parent>`
+		})
+	</script>
+</html>

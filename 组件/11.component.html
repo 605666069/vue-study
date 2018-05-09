@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<script src="../node_modules/vue-router/dist/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+		
+	</head>
+	<body>
+		<div id="app">
+			<input type="radio" v-model="radio" value="home"/>home
+			<input type="radio" v-model="radio" value="list"/>list
+			<!--teampalte slot transition-->
+			<!--一般用作缓存:为的是后面的路由做准备  如果缓存后 不会再走creaeted等钩子函数 -->
+			<keep-alive>
+				<component :is="radio"></component>
+			</keep-alive>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		let home = {
+			template:`<div>home</div>`
+		}
+		let list = {
+			template:`<div>list</div>`
+		}
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				radio:'home'
+			},
+			components:{
+				home,list
+			}
+			
+		})
+	</script>
+</html>

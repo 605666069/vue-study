@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<script src="../node_modules/vue-router/dist/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+		
+	</head>
+	<body>
+		<div id="app">
+			<child ref="child"></child>
+		</div>
+		<!--子组件和父组件同时拥有mounted 方法 会先走子组件
+		需要等待子组件挂载完成后才会触发父组件的挂载-->
+		<template id="child">
+			<div>
+				<div v-for="a in arr">{{a}}</div>
+			</div>
+		</template>
+	</body>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:'#app',
+			mounted() {
+				this.$nextTick(()=>{ //想操作dom 需要增加nextTick
+					console.log(this.$refs.child.$el.innerHTML)
+				})
+			},
+			components:{
+				child:{
+					mounted() {
+						this.arr = [4,5,6]	//此处是异步渲染dom					
+					},
+					template:"#child",
+					data() {
+						return {arr:[1,2,3]}
+					}
+				}
+			}
+			
+		})
+	</script>
+</html>

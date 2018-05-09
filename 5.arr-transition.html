@@ -1,0 +1,33 @@
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title></title>
+	</head>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<link href="node_modules/animate.css/animate.min.css" rel="stylesheet">
+	<body>
+		<div id="app">
+			<input type="text" v-model="query" />
+			<transition-group enter-active-class="animated bounceIn" leave-active-class="animated bounceOut">
+				<div v-for="(a,index) in filterArr" :key="Math.random()">
+					{{a}}
+				</div>
+			</transition-group>
+		</div>
+	</body>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:'#app',
+			computed:{
+				filterArr() {
+					return this.query==''?this.arr:this.arr.filter(item=>item==this.query)
+				}
+			},
+			data:{
+				query:'',
+				arr:[1,2,3,4,5]
+			},
+			
+		})
+	</script>
+</html>

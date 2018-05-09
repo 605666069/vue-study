@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<script src="../node_modules/vue-router/dist/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+	</head>
+	
+	<body>
+		<div id="app">
+			<!--编程式导航,在JS跳转页面-->
+			<router-link to="/article/1/a" >商品1</router-link>
+			<router-link to="/article/2/b" >商品2</router-link>
+			<router-link to="/article/3/c" >商品3</router-link>
+			<router-link to="/article/4/d" >商品4</router-link>
+			<router-view></router-view>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		let article = {
+			template:`<div>第 {{$route.params.c}} 篇文章</div>`
+		}
+		// /article/:c/:a => {c:2,a:b} = this.$route.params
+		let routes = [//路径参数 表示值必须要有 但是值是随机的
+			{path:'/article/:c/:a',component:article}
+		]
+		let router = new VueRouter({//引入vueRouter类
+			routes:routes
+		})
+		let vm = new Vue({
+			el:"#app",
+			router,
+			
+		})
+	</script>
+</html>

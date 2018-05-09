@@ -1,0 +1,19 @@
+{
+  "name": "vue_study",
+  "version": "1.0.0",
+  "description": "",
+  "main": "1.arr.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "animate.css": "^3.6.1",
+    "axios": "^0.18.0",
+    "bootstrap": "^3.3.7",
+    "vue": "^2.5.16",
+    "vue-router": "^3.0.1"
+  }
+}

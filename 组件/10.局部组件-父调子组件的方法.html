@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<script src="../node_modules/vue-router/dist/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+		
+	</head>
+	<body>
+		<div id="app">
+			<button @click="hide">隐藏loading</button>
+			<loading ref="load"></loading>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		let loading = {
+			template:`<div v-show="flag">疯狂加载中</div>`,
+			methods:{
+				hide() {
+					this.flag = false					
+				}
+			},
+			data() {
+				return {
+					flag:true
+				}
+			},
+		}
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				
+			},
+			components:{
+				loading
+			},
+			mounted(){
+				
+			},
+			methods:{
+				hide() {
+					this.$refs.load.hide()
+				}
+			}
+			
+		})
+	</script>
+</html>

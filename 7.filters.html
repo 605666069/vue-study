@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="node_modules/vue/dist/vue.js"></script>
+	</head>
+	<body>
+		<div id="app1">
+			{{'hello' | my}}
+		</div>
+	</body>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:'#app1',
+			filters:{
+				my(data) {
+					return 'jw:' + data
+				}
+			}
+		})
+	</script>
+</html>

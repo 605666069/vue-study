@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+	</head>
+	<body>
+		<div id="app">
+			父亲:{{money}}
+			<child :m.sync="money"></child>
+		</div>
+	</body>
+	<script type="text/javascript">
+		let vm = new Vue({
+			el:'#app',
+			data:{
+				money:400
+			},
+			components:{
+				child:{
+					template:`<div>儿子{{m}} <button @click="getMoney">多要钱</button></div>`,
+					props:['m'],
+					methods:{
+						getMoney() {
+							this.$emit('update:m',this.m+100)
+						}
+					}
+				},
+			},
+		})
+	</script>
+</html>

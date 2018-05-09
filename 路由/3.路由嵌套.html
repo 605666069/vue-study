@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<script src="../node_modules/vue-router/dist/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+	</head>
+	
+	<body>
+		<div id="app">
+			<!--编程式导航,在JS跳转页面-->
+			<router-link to="/home" >首页</router-link>
+			<router-link to="/detail">详情页</router-link>
+			<router-view></router-view>
+		</div>
+		<template id="detail">
+			<div>
+				<router-link to="/detail/profile">个人中心</router-link>
+				<router-link to="/detail/about" >about</router-link>
+				<router-view></router-view>
+			</div>
+		</template>
+	</body>
+	<script type="text/javascript">
+		let home = {
+			template:`<div>home</div>`,
+			methods:{
+				
+			}
+		}
+		let detail = {
+			template:"#detail",
+		}
+		let profile = {
+			template:`<div>profile</div>`,
+		}
+		let about = {
+			template:`<div>about</div>`,
+		}
+		let routes = [
+			{
+				path:'/home',
+				component:home
+			},
+			{
+				path:'/detail',
+				component:detail,
+				children:[//children 中不带路径 带/表示一级路由
+					{path:'about',component:about},
+					{path:'profile',component:profile}
+				]
+			},
+		]
+		let router = new VueRouter({//引入vueRouter类
+			routes:routes,
+			linkActiveClass:"active"
+		})
+		let vm = new Vue({
+			el:"#app",
+			router,
+			
+		})
+	</script>
+</html>

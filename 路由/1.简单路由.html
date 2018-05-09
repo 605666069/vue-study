@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../node_modules/bootstrap/dist/css/bootstrap.css"/>
+		<script src="../node_modules/vue/dist/vue.js"></script>
+		<script src="../node_modules/axios/dist/axios.js" ></script>
+		<script src="../node_modules/vue-router/dist/vue-router.js" type="text/javascript" charset="utf-8"></script>
+		<link href="../node_modules/animate.css/animate.min.css" rel="stylesheet">
+		<style type="text/css">
+			.active {
+				color: red;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<!--访问不同的路径 返回不同的结果-->
+		<!--前端跳转hash # h5的history.pushState-->
+		<div id="app">
+			<router-link to="/home" tag="button">首页</router-link>
+			<router-link to="/list" tag="button">列表页</router-link>
+			<!--router-view是一个全局组件 可以直接使用-->
+			<router-view></router-view>
+		</div>
+		
+	</body>
+	<script type="text/javascript">
+		let home = {
+			template:`<div>首页</div>`
+		}
+		let list = {
+			template:`<div>列表</div>`
+		}
+		let routes = [//路由的映射表 配置路径和组件的关系
+			{path:'/home',component:home},//配置的关系就是页面级组件
+			{path:'/list',component:list},//路径必须加/
+		]
+		let router = new VueRouter({//引入vueRouter类
+			routes:routes,
+			linkActiveClass:"active"
+			
+		})
+		let vm = new Vue({
+			el:"#app",
+			router
+		})
+	</script>
+</html>
