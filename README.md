@@ -1,2 +1,2 @@
 # vue-study
-a vue study demo
+vue学习
